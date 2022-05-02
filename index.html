@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<h1>
+   <button>
+       Xem thống kê
+   </button>
+</h1>
+<h2>
+    <div style="background-color: cyan">
+        <img src="1.jpg" width="200" height="100">
+        <label style="color:rgb(23, 0, 128);font-size:42px">
+            Trung Tâm Theo Dõi Sức Khỏe</label>
+    </div>
+</h2>
+<h3>Danh sách khách hàng
+
+<style>
+    table, th, td {
+      border: 1px solid black;
+    }
+    </style>
+<body style="background-color: rgb(156, 230, 144);">
+    <div>
+        <table style="width:100%">
+            <thead>
+                <th>Số Căn Cước</th>
+                <th>Họ và Tên</th>
+                <th>Tuổi</th>
+                <th>Số điện thoại</th>
+                <th>Tình trạng sức khỏe</th>
+                <th>Huyết áp</th>
+                <th>Nhịp tim</th>
+            </thead>
+            <tbody id="tbody1"></tbody>
+        </table>
+    </div>
+
+    <script type="module">
+        var stdNo = 0;
+        var tbody = document.getElementById('tbody1');
+        function AddItemToTable(cccd,name,age,phone,health){
+            let trow = document.createElement("tr");
+            let td1 = document.createElement('td');
+            let td2 = document.createElement('td');
+            let td3 = document.createElement('td');
+            let td4 = document.createElement('td');
+            let td5 = document.createElement('td');
+            let td6 = document.createElement('td');
+
+            
+            td1.innerHTML = ++stdNo;
+            td2.innerHTML = cccd;
+            td3.innerHTML = name;
+            td4.innerHTML = age;
+            td5.innerHTML = phone;
+            td6.innerHTML = health;
+
+            //trow.appendChild(td1);
+            trow.appendChild(td2);
+            trow.appendChild(td3);
+            trow.appendChild(td4);
+            trow.appendChild(td5);
+            trow.appendChild(td6);
+
+            tbody.appendChild(trow);
+
+        }
+        function AddAllItemToTable(human){
+            stdNo = 0;
+            tbody.innerHTML="";
+            human.forEach(element=>{
+                AddItemToTable(element.CCCD,element.Name,element.Age,element.Phone,element.health);
+            });
+        }
+    
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyDuuFGYojT3CMUCNVGHfRIyqhZs-obyKBE",
+            authDomain: "data-station-c589b.firebaseapp.com",
+            databaseURL: "https://data-station-c589b-default-rtdb.firebaseio.com",
+            projectId: "data-station-c589b",
+            storageBucket: "data-station-c589b.appspot.com",
+            messagingSenderId: "78410046045",
+            appId: "1:78410046045:web:0d9b27e318ef08acc98bb4",
+            measurementId: "G-4K5VV3VL21"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        import{getDatabase,ref,child,onValue,get}
+        from "https://www.gstatic.com/firebasejs/9.7.0/firebase-database.js"
+        const db = getDatabase();
+
+        function GetAllData(){
+            const dbRef = ref(db,"human");
+            onValue(dbRef,(snapshot)=>{
+                var human=[];
+                snapshot.forEach(childSnapshot =>{
+                    human.push(childSnapshot.val());
+                });
+                AddAllItemToTable(human);
+            });
+        }
+        window.onload = GetAllData;
+
+    </script>
+                
+    <script src='.//jss/main.js'></script>
+</body>
+</h3>
+</html>

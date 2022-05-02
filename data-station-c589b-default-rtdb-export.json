@@ -1,0 +1,20 @@
+{
+  "human": [
+    {
+      "Age": 23,
+      "CCCD": 122313756,
+      "Location": "\"(30,40)\"",
+      "Name": "Bùi Trung Kiên",
+      "Phone": "0869397417",
+      "health": "sức khỏe ổn định"
+    },
+    {
+      "Age": 20,
+      "CCCD": 125415236,
+      "Location": "\"(30,45)\"",
+      "Name": "Lê Thị An",
+      "Phone": "0853226544",
+      "health": "có biểu hiện sốt, ho, khó thở"
+    }
+  ]
+}
